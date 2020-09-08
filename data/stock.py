@@ -11,7 +11,7 @@ def class Stock(Object):
         self.price = 0
         self.lastTradeTime = ""
         self.area = ""
-        self.stockEx = ""
+        self.ex = ""
         
     def getID(self):
         return self.id
@@ -19,6 +19,8 @@ def class Stock(Object):
         self.stockEx+self.name
     def getName(self):
         return self.name
+    def getEx(self):
+        return self.ex
         
     def getPrice(self):
         return self.price
