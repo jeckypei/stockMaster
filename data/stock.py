@@ -15,6 +15,8 @@ def class Stock(Object):
         
     def getID(self):
         return self.id
+    def getFullID(self):
+        self.stockEx+self.name
     def getName(self):
         return self.name
         
