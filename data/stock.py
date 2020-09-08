@@ -3,20 +3,19 @@
 define stock baic information
 
 '''
-def class Stock(Object):
+class Stock(object):
    
-    def __init__(self, id, name, area, stockEx):
+    def __init__(self, id, name, area, ex):
         self.name = name
         self.id = id
         self.price = 0
-        self.lastTradeTime = ""
-        self.area = ""
-        self.ex = ""
+        self.area = area
+        self.ex = ex
         
     def getID(self):
         return self.id
     def getFullID(self):
-        self.stockEx+self.name
+        return self.ex + self.id
     def getName(self):
         return self.name
     def getEx(self):
@@ -30,7 +29,7 @@ def class Stock(Object):
     def getLastTradeTime(self):
         return self.lastTradeTime
     def setLastTradeTime(self, time):
-        return self.lastTradeTime = lastTradeTime
-    
+        self.lastTradeTime = time
+        
         
     

@@ -1,6 +1,6 @@
 import abc  
 
-class StockProxy(object, metaclass=abc.ABCMeta):
+class StockProxy(metaclass=abc.ABCMeta):
     @abc.abstractmethod  
     def updatePrice(self, stock):
         pass
