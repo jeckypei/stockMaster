@@ -15,18 +15,23 @@ class Stock(object):
         
     def getID(self):
         return self.id
+
     def getFullID(self):
         return self.ex + self.id
+
     def getName(self):
         return self.name
+
     def getEx(self):
         return self.ex
         
     def getPrice(self):
         self.updatePrice()
         return self.price
+
     def updatePrice(self):
-        self.proxy[0].updatePrice(self)
+        if len(self.proxy) > 0 :
+            self.proxy[0].updatePrice(self)
         
     def setPrice(self, price):
         self.price = price
@@ -38,6 +43,7 @@ class Stock(object):
         self.lastTradeTime = time
         
     def addProxy(self, proxy):
-        self.proxy[proxy.getName()] = proxy    
+        self.proxy[len(self.proxy)] = proxy    
+
     def delProxy(self, proxy):
         del self.proxy[proxy.getName()]   

@@ -72,11 +72,11 @@ class StockProxySina(StockProxy):
     
     def __init__(self):
         self.url=self.API_URL
-        
+        self.dataArray=[]
     def updatePrice(self, stock):
         url=self.url + stock.getFullID()
         r = requests.get(url)
-        #print(url)
+        logging.debug(url)
         if r.status_code != requests.codes.ok :
             logging.error("http request error： " + r.status_code + ",url:" + r)    
         #print(r.content)
@@ -84,14 +84,15 @@ class StockProxySina(StockProxy):
         start = dataStr.find("\"", 0)
         end = dataStr.find("\"",start + 1)
         coreStr = str(dataStr[start + 1:end - 1])
-        dataArray = coreStr.split(',')
-        #print(dataArray)
+        self.dataArray = coreStr.split(',')
+        logging.debug("print sina data:")
+        logging.debug(self.dataArray)
         if stock.getEx() == 'hk':
-            stock.setPrice(float(dataArray[5]))
+            stock.setPrice(float(self.dataArray[5]))
         elif  stock.getEx() == 'sh':   
-            stock.setPrice(float(dataArray[3]))
+            stock.setPrice(float(self.dataArray[3]))
         elif  stock.getEx() == 'sz':   
-            stock.setPrice(float(dataArray[3])) 
+            stock.setPrice(float(self.dataArray[3])) 
         else:
              logging.error("error： don't support Ex" + r.status_code + ",url:" + r)        
         
