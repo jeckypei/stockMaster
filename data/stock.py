@@ -22,14 +22,21 @@ class Stock(object):
         return self.ex
         
     def getPrice(self):
+        self.updatePrice()
         return self.price
+    def updatePrice(self):
+        self.proxy.updatePrice(self)
+        
     def setPrice(self, price):
         self.price = price
     
     def getLastTradeTime(self):
         return self.lastTradeTime
+    
     def setLastTradeTime(self, time):
         self.lastTradeTime = time
         
-        
-    
+    def addProxy(self, proxy):
+        self.proxy[proxy.getName()] = proxy    
+    def delProxy(self, proxy):
+        del self.proxy[proxy.getName()]   

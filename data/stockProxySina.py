@@ -98,3 +98,6 @@ class StockProxySina(StockProxy):
     
     def getPrice(self, stockFullID, time=""):
         pass
+
+    def getName(self):
+        return 'sina'
