@@ -11,6 +11,7 @@ class Stock(object):
         self.price = 0
         self.area = area
         self.ex = ex
+        self.proxy = {}
         
     def getID(self):
         return self.id
@@ -25,7 +26,7 @@ class Stock(object):
         self.updatePrice()
         return self.price
     def updatePrice(self):
-        self.proxy.updatePrice(self)
+        self.proxy[0].updatePrice(self)
         
     def setPrice(self, price):
         self.price = price
