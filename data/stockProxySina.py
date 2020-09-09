@@ -87,8 +87,9 @@ class StockProxySina(StockProxy):
         self.dataArray = coreStr.split(',')
         logging.debug("print sina data:")
         logging.debug(self.dataArray)
+        #print(self.dataArray)
         if stock.getEx() == 'hk':
-            stock.setPrice(float(self.dataArray[5]))
+            stock.setPrice(float(self.dataArray[6]))
         elif  stock.getEx() == 'sh':   
             stock.setPrice(float(self.dataArray[3]))
         elif  stock.getEx() == 'sz':   
