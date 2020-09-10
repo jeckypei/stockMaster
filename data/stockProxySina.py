@@ -4,6 +4,7 @@ import logging
 import stock
 import abc  
 from stockProxy import StockProxy
+from datetime import datetime
 '''
 HangKong stock
 request: http://hq.sinajs.cn/list=hk01810
@@ -90,10 +91,13 @@ class StockProxySina(StockProxy):
         #print(self.dataArray)
         if stock.getEx() == 'hk':
             stock.setPrice(float(self.dataArray[6]))
+            stock.setPriceDatetime(datetime.strptime(self.dataArray[17] + " " +  self.dataArray[18], '%Y/%m/%d %H:%M' if self.dataArray[18].count(":") == 1 else '%Y/%m/%d %H:%M:%S') )
         elif  stock.getEx() == 'sh':   
             stock.setPrice(float(self.dataArray[3]))
+            stock.setPriceDatetime(datetime.strptime(self.dataArray[30] + " " +  self.dataArray[31], '%Y-%m-%d %H:%M' if self.dataArray[31].count(":") == 1 else '%Y-%m-%d %H:%M:%S') )
         elif  stock.getEx() == 'sz':   
             stock.setPrice(float(self.dataArray[3])) 
+            stock.setPriceDatetime(datetime.strptime(self.dataArray[30] + " " +  self.dataArray[31], '%Y-%m-%d %H:%M' if self.dataArray[31].count(":") == 1 else '%Y-%m-%d %H:%M:%S') )
         else:
              logging.error("error： don't support Ex" + r.status_code + ",url:" + r)        
         

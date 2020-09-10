@@ -3,6 +3,8 @@
 define stock baic information
 
 '''
+from datetime import datetime
+
 class Stock(object):
    
     def __init__(self, id, name, area, ex):
@@ -12,6 +14,7 @@ class Stock(object):
         self.area = area
         self.ex = ex
         self.proxy = {}
+        self.datetime = datetime.now()
         
     def getID(self):
         return self.id
@@ -35,6 +38,10 @@ class Stock(object):
         
     def setPrice(self, price):
         self.price = price
+    def setPriceDatetime(self, dt):
+        self.datetime = dt    
+    def getPriceDatetime(self):
+        return self.datetime      
     
     def getLastTradeTime(self):
         return self.lastTradeTime
