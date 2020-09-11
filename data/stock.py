@@ -15,6 +15,26 @@ class Stock(object):
         self.ex = ex
         self.proxy = {}
         self.datetime = datetime.now()
+        ####
+        self.ipoPrice = 0
+        self.lowestPrice2Year = 0
+        self.averagePrice2Year = 0
+        self.highestPrice2Year = 0
+        self.lowestPrice1Year = 0
+        self.averagePrice1Year = 0
+        self.highestPrice1Year = 0
+        self.lowestPrice6Month = 0
+        self.averagePrice6Month = 0
+        self.highestPrice6Month = 0
+        self.lowestPrice3Month = 0
+        self.averagePrice3Month = 0
+        self.highestPrice3Month = 0
+        self.lowestPriceToday = 0
+        self.highestPriceToday = 0
+        ####
+        self.toBuyPrice = 0
+        self.valuePrice = 0
+        self.toSalePrice = 0
         
     def getID(self):
         return self.id
