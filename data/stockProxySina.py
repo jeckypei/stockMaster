@@ -1,9 +1,10 @@
 import abc  
 import requests
 import logging
-import stock
+
 import abc  
-from stockProxy import StockProxy
+#from data.stock import Stock
+from data.stockProxy import StockProxy
 from datetime import datetime
 '''
 HangKong stock

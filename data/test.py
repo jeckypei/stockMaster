@@ -3,9 +3,9 @@
 test program
 '''
 
-from stock import Stock
-from stockProxy import StockProxy
-from stockProxySina import StockProxySina
+from data.stock import Stock
+from data.stockProxy import StockProxy
+from data.stockProxySina import StockProxySina
 
 def test():
     print("Test StockProxySina")
