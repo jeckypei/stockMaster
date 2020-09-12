@@ -35,7 +35,7 @@ class Worker:
                 
     def addStock(self, config):
         stock = Stock(config["id"], config["name"] ,config["area"] , config["ex"])
-        print("loading Stock: " + stock.getFullID() + " " + stock.getName())
+        print("  Stock: " + stock.getFullID() + " " + stock.getName())
         self.stockSet[stock.getFullID()] = stock
         stock.setInfo(config)
         pass
