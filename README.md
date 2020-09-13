@@ -4,7 +4,16 @@ It will use general rules and neural network to give a prediction.
 
 Systems:
 
-StockObserver StockPridector Policy Decision Notifier
+Observer Pridector Policy Decision Notifier
+
+Releae Note
+ToDo:
+ WeChat 通知
+ Notify 配置文件 
+ AI预测股价 
+v0.1:
+ get price from sina and judge price by PurePricePolicy, then Notify(print)
+
 
 
 
