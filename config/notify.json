@@ -1,0 +1,24 @@
+{
+    "print": {
+        "toBuyStock":true,
+        "toSaleStock":true,
+        "keepStock":true
+    },
+    "email": {
+        "server": "",
+        "id": "",
+        "password": "",
+        "toBuyStock":true,
+        "toSaleStock":true,
+        "keepStock":true
+    },
+    "wechat": {
+        "server": "",
+        "id": "",
+        "password": "",
+        "toBuyStock":true,
+        "toSaleStock":true,
+        "keepStock":true
+    }
+
+}
