@@ -6,7 +6,14 @@ Systems:
 
 Observer Pridector Policy Decision Notifier
 
-Releae Note
+1. how to run this program:
+  download repo from https://github.com/jeckypei/stockMaster.git
+  install python3 package on your OS
+  shell commands: cd stockMaster ; ./stockMaster.py
+
+2. configurations
+  in dir : ./config/
+3. Releae Note
 ToDo:
  从其他财经网站获取股票信息
  WeChat 通知
