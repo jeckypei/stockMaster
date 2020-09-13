@@ -1,6 +1,7 @@
 import threading
 from threading import Thread
 import time
+import datetime
 import sys
 sys.path.append("..")
 from data.stock import Stock
@@ -26,6 +27,7 @@ class Notify(Thread) :
                
     def run(self):
         while (not self._stop and (self.event.wait(self.interval) != None)) :
+            print("\t\t\t" + str(datetime.datetime.now()))
             self.event.clear()
             self.notifyToBuyStocks()
             self.notifyToSaleStocks()             
