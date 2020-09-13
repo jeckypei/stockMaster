@@ -46,6 +46,9 @@ class Stock(object):
         self.toBuyPrice = 0
         self.valuePrice = 0
         self.toSalePrice = 0
+        self.notifyToBuy = False
+        self.notifyToSale = False
+        self.notifyKeep = False
         
     def setInfo(self, config):
         self.price = config["price"]

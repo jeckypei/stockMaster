@@ -2,23 +2,46 @@ import sys
 sys.path.append("..")
 from data.stock import Stock
 import time
+from notify.notify import Notify
 class PurePricePolicy :
-    def __init__(self, interval = 5, loopCount = -1):
+    def __init__(self, notify = None, interval = 5, loopCount = -1):
+        self.notify = notify
         self.loopCount = loopCount
         self.interval = interval
         self._stop = False
     def flow(self, stock) :
         if stock.getPrice() <= stock.toBuyPrice: 
-            print ("To Buy: " + stock.getFullID() + " "  + stock.getName() + " CurrentPrice " + str(stock.price) + " <= " + str(stock.toBuyPrice) )
-        else:
-            pass
-            #print ("Don't Buy: " + stock.getFullID() + " "  + stock.getName() + " CurrentPrice " + str(stock.price) + " > " + str(stock.toBuyPrice) )
-        #    
-        if stock.getPrice() >= stock.toSalePrice: 
-            print ("To Sale: " + stock.getFullID() + " "  + stock.getName() + " CurrentPrice " + str(stock.price) + " >= " + str(stock.toSalePrice) )
-        else:
-            pass
-            #print ("Don't Safe: " + stock.getFullID() + " "  + stock.getName() + " CurrentPrice " + str(stock.price) + " < " + str(stock.toSalePrice) )
+            if stock.notifyToBuy == False:
+                 self.notify.addToBuyStock(stock)
+                 stock.notifyToBuy = True
+            if stock.notifyToSale == True:
+                 self.notify.delToSaleStock(stock)
+                 stock.notifyToSale = False   
+            if stock.notifyKeep == True:
+                 self.notify.delKeepStock(stock)
+                 stock.notifyKeep = False          
+        elif stock.getPrice() >= stock.toSalePrice: 
+            if stock.notifyToSale == False:
+                 self.notify.addToSaleStock(stock)
+                 stock.notifyToSale = True
+            if stock.notifyToBuy == True:
+                 self.notify.delToBuyStock(stock)
+                 stock.notifyToBuy = False 
+            if stock.notifyKeep == True:
+                 self.notify.delKeepStock(stock)
+                 stock.notifyKeep = False         
+        else: 
+            if stock.notifyKeep == False:
+                 self.notify.addKeepStock(stock)
+                 stock.notifyKeep = True  
+            if stock.notifyToBuy == True:
+                 self.notify.delToBuyStock(stock)
+                 stock.notifyToBuy = False
+            if stock.notifyToSale == True:
+                 self.notify.delToSaleStock(stock)
+                 stock.notifyToSale = False
+               
+ 
             
     '''            
     def run(self, stock):

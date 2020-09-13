@@ -7,6 +7,8 @@ from policy.purePricePolicy import PurePricePolicy
 import json
 import os
 from worker.workerThread import WorkerThread
+from notify.notify import Notify
+
 
 class Worker:
     def __init__(self, configDir):
@@ -14,6 +16,7 @@ class Worker:
         self.stockDir = configDir + "stock"
         self.policyConfig = {}
         self.stockSet = {}
+        self.notify = Notify()
         pass
     def loadPolicy(self):
         print("load policyfile : " + self.configDir + "policy.json")
@@ -32,6 +35,9 @@ class Worker:
             with open(fpath, "r") as pf:
                 config = json.load(pf)
                 self.addStock(config)
+    def startNotify(self):
+        print("start notify")
+        self.notify.start()           
                 
     def addStock(self, config):
         stock = Stock(config["id"], config["name"] ,config["area"] , config["ex"])
@@ -43,23 +49,26 @@ class Worker:
     def startWork(self):
         self.loadStock()
         self.loadPolicy()
+        self.startNotify()
         if self.policyConfig["shareThreadNum"] == 0 :
             self.runPerThread()
         elif self.policyConfig["shareThreadNum"] == 1 :    
             self.runOneThread()
               
-    def runOneThread(self):
+    def runPerThread(self):
+        print("Per Worker thread")
         if self.policyConfig["defaultPolicy"] == "purePricePolicy" :
-            policy = PurePricePolicy(self.policyConfig["interval"])
+            policy = PurePricePolicy(self.notify, self.policyConfig["interval"])
         for i in self.stockSet:
             ss = {}
             ss[0] = self.stockSet[i]
             thread = WorkerThread(ss, policy)
             thread.start()    
                 
-    def runPerThread(self):
+    def runOneThread(self):
+        print("One Worker thread")
         if self.policyConfig["defaultPolicy"] == "purePricePolicy" :
-            policy = PurePricePolicy(self.policyConfig["interval"])
+            policy = PurePricePolicy(self.notify, self.policyConfig["interval"])
         thread = WorkerThread(self.stockSet, policy)
         thread.start()      
                 

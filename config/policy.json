@@ -1,6 +1,6 @@
 {
     "__note__": "shareThreadNum: 0: everyone have a thread, 1: share one thread",
     "defaultPolicy" : "purePricePolicy",
-    "shareThreadNum" : 0,
+    "shareThreadNum" : 1,
     "interval" : 5
 }
