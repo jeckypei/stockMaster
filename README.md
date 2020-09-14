@@ -1,5 +1,6 @@
 # stockMaster is software for chinese A/H stock system
-炒股辅助工具。
+此软件为股票投资辅助工具 
+
 基本模块:  观察，决策\策略，预测，通知
 
 Contact Me: WeChat: realjecky , mail: jeckypei@163.com
