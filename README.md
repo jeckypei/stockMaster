@@ -14,7 +14,7 @@
     e)通知（打印，邮件#todo，图形#todo）。
  
 
-
+==========================================================================================================================================
 
 
   
@@ -26,12 +26,15 @@
 
   1.b) 下载该库  
      git命令： git clone https://github.com/jeckypei/stockMaster.git
+     
      WEB下载文件：     https://github.com/jeckypei/stockMaster/archive/master.zip
   
   1.c)  启动命令start commands:   cd stockMaster ; python3 ./stockMaster.py
 
+
 （2） configurations 
   in dir : ./config/
+  
   
 （3） To do list: 
  
@@ -51,8 +54,10 @@
   v1.0:
     get price from sina and judge price by PurePricePolicy, then Notify(print)
 
+
 （5） bug list
   list it in issues 
+  
   
 （6）refer doc
      https://blog.csdn.net/otter1010/article/details/105884256/
