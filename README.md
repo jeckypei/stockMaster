@@ -5,8 +5,9 @@
 
 Contact Me: WeChat: realjecky , mail: jeckypei@163.com
   
+  
 
-1. how to run this program ?
+（1）. how to run this program ?
 
   download repo from https://github.com/jeckypei/stockMaster.git
   
@@ -14,10 +15,10 @@ Contact Me: WeChat: realjecky , mail: jeckypei@163.com
   
   shell commands: cd stockMaster ; python3 ./stockMaster.py
 
-2. configurations 
+（2） configurations 
   in dir : ./config/
   
-3. To do list: 
+（3） To do list: 
  
  从其他财经site: tencent, hexun,xueqiu获取股票信息
  
@@ -30,16 +31,16 @@ Contact Me: WeChat: realjecky , mail: jeckypei@163.com
  AI预测股价
  
  
-4. release notes
+（4） release notes
 
   v1.0:
     get price from sina and judge price by PurePricePolicy, then Notify(print)
 
-5. bug list
+（5） bug list
   list it in issues 
   
-6. refer doc
-https://blog.csdn.net/otter1010/article/details/105884256/
+（6）refer doc
+     https://blog.csdn.net/otter1010/article/details/105884256/
 
 
 
