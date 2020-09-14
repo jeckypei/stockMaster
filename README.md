@@ -22,13 +22,13 @@
 
 （1）. how to run this program ?  如何安装运行软件 ？
 
-  a） 安装python3. install python3 package on your OS 
+  1.a） 安装python3. install python3 package on your OS 
 
-  b) download repo from https://github.com/jeckypei/stockMaster.git， 下载该库
-     命令： git clone https://github.com/jeckypei/stockMaster.git
+  1.b) 下载该库  
+     git命令： git clone https://github.com/jeckypei/stockMaster.git
+     WEB下载文件：     https://github.com/jeckypei/stockMaster/archive/master.zip
   
-  
-  c)  启动命令start commands:   cd stockMaster ; python3 ./stockMaster.py
+  1.c)  启动命令start commands:   cd stockMaster ; python3 ./stockMaster.py
 
 （2） configurations 
   in dir : ./config/
