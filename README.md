@@ -15,13 +15,15 @@ Observer Pridector Policy Decision Notifier
   in dir : ./config/
 3. Releae Note
 ToDo:
- 从其他财经网站获取股票信息
+ 从其他财经site: tencent, hexun,xueqiu获取股票信息
  WeChat 通知
  Notify 配置文件 
  AI预测股价 
 v0.1:
  get price from sina and judge price by PurePricePolicy, then Notify(print)
 
+4. refer doc
+https://blog.csdn.net/otter1010/article/details/105884256/
 
 
 
