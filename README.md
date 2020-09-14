@@ -23,6 +23,7 @@ Systems:
  AI预测股价
  
 4. release notes
+
 v1.0:
   get price from sina and judge price by PurePricePolicy, then Notify(print)
 
