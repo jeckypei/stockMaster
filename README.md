@@ -22,41 +22,44 @@
 
 （1）. how to run this program ?  如何安装运行软件 ？
 
-  1.a） 安装python3. install python3 package on your OS 
+    1.a） 安装python3. install python3 package on your OS 
 
-  1.b) 下载该库  
+    1.b) 下载该库  
      git命令： git clone https://github.com/jeckypei/stockMaster.git
      
      WEB下载文件：     https://github.com/jeckypei/stockMaster/archive/master.zip
   
-  1.c)  启动命令start commands:   cd stockMaster ; python3 ./stockMaster.py
+    1.c)  启动命令start commands:   cd stockMaster ; python3 ./stockMaster.py
 
 
-（2） configurations 
-  in dir : ./config/
+（2） 配置文件configurations 
+  
+     目录 dir : ./config/
+  
+     添加股票： ./config/stock/ ,  请参阅已有的股票文件为基础修改即可
   
   
 （3） To do list: 
  
- 从其他财经site: tencent, hexun,xueqiu获取股票信息
+     从其他财经site: tencent, hexun,xueqiu获取股票信息
  
- email 通知
+     email 通知
  
- #WeChat 通知
+     #WeChat 通知
  
- Notify 配置文件 
+     Notify 配置文件 
  
- AI预测股价
+     AI预测股价
  
  
 （4） release notes
 
-  v1.0:
-    get price from sina and judge price by PurePricePolicy, then Notify(print)
+      v1.0:
+        get price from sina and judge price by PurePricePolicy, then Notify(print)
 
 
 （5） bug list
-  list it in issues 
+      list it in issues 
   
   
 （6）refer doc
