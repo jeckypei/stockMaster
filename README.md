@@ -3,7 +3,7 @@ It try to tell us when to buy and sell stocks with a good price.
 It will use general rules and neural network to give a prediction.
 
 SubSystem:  观察，决策\策略，预测
-   
+Contact Me: WeChat: realjecky , mail: jeckypei@163.com
   
 
 1. how to run this program ?
