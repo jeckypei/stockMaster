@@ -1,8 +1,6 @@
 # stockMaster is software for chinese A/H stock system
-It try to tell us when to buy and sell stocks with a good price.
-It will use general rules and neural network to give a prediction.
-
-SubSystem:  观察，决策\策略，预测
+炒股辅助工具。
+基本模块:  观察，决策\策略，预测，通知
 
 Contact Me: WeChat: realjecky , mail: jeckypei@163.com
   
