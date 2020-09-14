@@ -1,7 +1,9 @@
 # stockMaster is software for chinese A/H stock system
 此软件为股票投资辅助工具 
 
-基本模块:  观察，决策\策略，预测，通知
+基本模块:  观察/数据获取，决策\策略，预测，通知
+
+目前数据获取 没有使用tushare，试用过，糟糕的安装体验，python包依赖的通病。 如果为了获取更多数据不排斥tushare 
 
 Contact Me: WeChat: realjecky , mail: jeckypei@163.com
   
