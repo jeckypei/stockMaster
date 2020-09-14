@@ -20,10 +20,15 @@ Contact Me: WeChat: realjecky , mail: jeckypei@163.com
 3. To do list: 
  
  从其他财经site: tencent, hexun,xueqiu获取股票信息
+ 
  email 通知
+ 
  #WeChat 通知
+ 
  Notify 配置文件 
+ 
  AI预测股价
+ 
  
 4. release notes
 
