@@ -14,16 +14,19 @@ Systems:
 2. configurations 
   in dir : ./config/
   
-3. Releae Note
-ToDo:
+3. To do list: 
+ 
  从其他财经site: tencent, hexun,xueqiu获取股票信息
- WeChat 通知
+ email 通知
+ #WeChat 通知
  Notify 配置文件 
- AI预测股价 
+ AI预测股价
+ 
+4. release notes
 v0.1:
- get price from sina and judge price by PurePricePolicy, then Notify(print)
+  get price from sina and judge price by PurePricePolicy, then Notify(print)
 
-4. refer doc
+5. refer doc
 https://blog.csdn.net/otter1010/article/details/105884256/
 
 
