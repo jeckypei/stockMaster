@@ -7,8 +7,11 @@ Contact Me: WeChat: realjecky , mail: jeckypei@163.com
   
 
 1. how to run this program ?
+
   download repo from https://github.com/jeckypei/stockMaster.git
+  
   install python3 package on your OS
+  
   shell commands: cd stockMaster ; python3 ./stockMaster.py
 
 2. configurations 
