@@ -26,7 +26,10 @@ Systems:
 v0.1:
   get price from sina and judge price by PurePricePolicy, then Notify(print)
 
-5. refer doc
+5. bug list
+  list it in issues 
+  
+6. refer doc
 https://blog.csdn.net/otter1010/article/details/105884256/
 
 
