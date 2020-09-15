@@ -39,21 +39,21 @@ class Notify(Thread) :
         print ("To Buy Stock (Number:%d)" % len(self.toBuyStocks) )
         for i in self.toBuyStocks:
             stock = self.toBuyStocks[i]
-            print ("\t" +stock.getFullID() + "\t"  + stock.getName() + "\tPrice\t" + str(stock.price) + " <= " + str(stock.toBuyPrice) + " " + str(stock.datetime ))
+            print ("\t" +stock.getFullID() + "\t"  + stock.getName() + "\t src " +stock.proxySrc + "\tPrice\t" + str(stock.price) + " <= " + str(stock.toBuyPrice) + " " + str(stock.datetime ))
         self.toBuyLock.release()       
     def notifyToSaleStocks(self):
         self.toSaleLock.acquire()
         print ("To Sale Stock (Number:%d)" % len(self.toSaleStocks) )
         for i in self.toSaleStocks:
             stock = self.toSaleStocks[i]
-            print ("\t" +stock.getFullID() + "\t"  + stock.getName() + "\tPrice\t" + str(stock.price) + " >= " + str(stock.toSalePrice) + " " + str(stock.datetime ))
+            print ("\t" +stock.getFullID() + "\t"  + stock.getName() + "\t src " +stock.proxySrc + "\tPrice\t" + str(stock.price) + " >= " + str(stock.toSalePrice) + " " + str(stock.datetime ))
         self.toSaleLock.release()     
     def notifyKeepStocks(self):
         self.keepLock.acquire()
         print ("To Keep Stock (Number:%d)" % len(self.keepStocks) )
         for i in self.keepStocks:
             stock = self.keepStocks[i]
-            print ("\t" +stock.getFullID() + "\t"  + stock.getName() + "\tPrice\t" + str(stock.price) + " > " + str(stock.toBuyPrice) + " &&  < " + str(stock.toSalePrice) + " " + str(stock.datetime))
+            print ("\t" +stock.getFullID() + "\t"  + stock.getName() + "\t src " +stock.proxySrc + "\tPrice\t" + str(stock.price) + " > " + str(stock.toBuyPrice) + " &&  < " + str(stock.toSalePrice) + " " + str(stock.datetime))
         self.keepLock.release()       
     
     def addToBuyStock(self, stock):

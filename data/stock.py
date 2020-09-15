@@ -18,6 +18,7 @@ class Stock(object):
         self.roe = 0        
         self.proxy = {}
         self.proxyPrice = {}
+        self.proxySrc = ""
         self.newestProxy = None
         self.datetime = None
         ####
@@ -135,7 +136,7 @@ class Stock(object):
             #print("price from: " + self.newestProxy)
             self.price = self.proxyPrice[self.newestProxy]['price']
             self.datetime = self.proxyPrice[self.newestProxy]['datetime']
-    
+            self.proxySrc = self.newestProxy
     def setPrice(self, price):
         self.price = price
         
