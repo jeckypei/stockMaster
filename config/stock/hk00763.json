@@ -3,7 +3,7 @@
     "id" : "00763",
     "ex" : "hk",
     "area" : "shenzhen",
-    "proxy" : ["sina"],
+    "proxy" : ["tencent","sina"],
     "pe" : 0,
     "roe": 0,
     "price": 0,
