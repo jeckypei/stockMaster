@@ -42,7 +42,7 @@ class Notify(Thread) :
         self.toBuyLock.acquire()
         for i in self.toBuyStocks:
             stock = self.toBuyStocks[i]
-            tbl.add_row(stock.getFullID(), + stock.getName(),stock.proxySrc,stock.price ,stock.toBuyPrice, stock.toSalePrice , stock.datetime)
+            tbl.add_row(stock.getFullID(), stock.getName(),stock.proxySrc,stock.price ,stock.toBuyPrice, stock.toSalePrice , stock.datetime)
         self.toBuyLock.release() 
         print(tbl)      
     def notifyToSaleStocks(self):
@@ -52,7 +52,7 @@ class Notify(Thread) :
         self.toSaleLock.acquire()
         for i in self.toSaleStocks:
             stock = self.toSaleStocks[i]
-            tbl.add_row(stock.getFullID(), + stock.getName(),stock.proxySrc,stock.price ,stock.toBuyPrice, stock.toSalePrice , stock.datetime)
+            tbl.add_row(stock.getFullID(), stock.getName(),stock.proxySrc,stock.price ,stock.toBuyPrice, stock.toSalePrice , stock.datetime)
         self.toSaleLock.release()     
         print(tbl)      
     def notifyKeepStocks(self):
@@ -62,7 +62,7 @@ class Notify(Thread) :
         self.keepLock.acquire()
         for i in self.keepStocks:
             stock = self.keepStocks[i]
-            tbl.add_row(stock.getFullID(), + stock.getName(),stock.proxySrc,stock.price ,stock.toBuyPrice, stock.toSalePrice , stock.datetime)
+            tbl.add_row(stock.getFullID(), stock.getName(),stock.proxySrc,stock.price ,stock.toBuyPrice, stock.toSalePrice , stock.datetime)
         self.keepLock.release()    
         print(tbl)         
     
