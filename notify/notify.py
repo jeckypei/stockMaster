@@ -28,12 +28,12 @@ class Notify(Thread) :
                
     def run(self):
         while (not self._stop and (self.event.wait(self.interval) != None)) :
-            print("\t\t\t" + str(datetime.datetime.now()))
+            print("\n\n\t\t\t" + str(datetime.datetime.now()))
             self.event.clear()
             self.notifyToBuyStocks()
             self.notifyToSaleStocks()             
             self.notifyKeepStocks()
-            print("-----------------------------------------------------------------------------------")
+            
             
     def notifyToBuyStocks(self):
         print ("To Buy Stock (Number:%d)" % len(self.toBuyStocks) )
