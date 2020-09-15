@@ -16,7 +16,7 @@ class Worker:
         self.stockDir = configDir + "stock"
         self.policyConfig = {}
         self.stockSet = {}
-        self.notify = Notify()
+        self.notify = Notify(configDir)
         pass
     def loadPolicy(self):
         print("load policyfile : " + self.configDir + "policy.json")
