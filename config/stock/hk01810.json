@@ -3,7 +3,7 @@
     "id" : "01810",
     "ex" : "hk",
     "area" : "beijing",
-    "proxy" : ["sina"],
+    "proxy" : ["tencent","sina"],
     "pe" : 0,
     "roe": 0,
     "price": 0,

@@ -6,7 +6,7 @@ import sys
 sys.path.append("..")
 from data.stock import Stock
 from data.stockProxy import StockProxy
-from data.stockProxySina import StockProxySina
+#from data.stockProxySina import StockProxySina
 #from policy.purePricePolicy import PurePricePolicy
 
 class Notify(Thread) :

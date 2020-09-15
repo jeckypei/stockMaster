@@ -3,7 +3,7 @@
     "id" : "002415",
     "ex" : "sz",
     "area" : "hangzhou",
-    "proxy" : ["sina"],
+    "proxy" : ["tencent","sina"],
     "pe" : 0,
     "roe": 0,
     "price": 0,

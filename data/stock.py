@@ -4,8 +4,8 @@ define stock baic information
 
 '''
 from datetime import datetime
-from data.stockProxy import StockProxy
-from data.stockProxySina import StockProxySina
+from .stockProxy import StockProxy
+
 class Stock(object):
    
     def __init__(self, id, name, area, ex):
@@ -17,6 +17,8 @@ class Stock(object):
         self.pe = 0
         self.roe = 0        
         self.proxy = {}
+        self.proxyPrice = {}
+        self.newestProxy = None
         self.datetime = None
         ####
         self.ipoPrice = 0
@@ -86,10 +88,7 @@ class Stock(object):
         self.toSalePrice = config["toSalePrice"]
         ####
         for p in config["proxy"]:
-            if p == "sina":
-                sp = StockProxySina()
-                self.addProxy(sp)
-                
+            self.addProxy(StockProxy.newStockProxy(p))
            
     def getID(self):
         return self.id
@@ -122,9 +121,21 @@ class Stock(object):
         return self.price
 
     def updatePrice(self):
-        if len(self.proxy) > 0 :
-            self.proxy[0].updatePrice(self)
-        
+        self.proxyPrice = {}
+        self.newestProxy = None
+        for i in self.proxy:
+            rp = self.proxy[i].updatePrice(self)
+            if (rp != None):
+                self.proxyPrice[rp[0]] = rp [1]
+                if self.newestProxy == None:  
+                    self.newestProxy = rp[0]
+                elif self.proxyPrice[rp[0]]['datetime'] > self.proxyPrice[self.newestProxy]['datetime']:   
+                    self.newestProxy = rp[0]
+        if self.newestProxy != None:            
+            #print("price from: " + self.newestProxy)
+            self.price = self.proxyPrice[self.newestProxy]['price']
+            self.datetime = self.proxyPrice[self.newestProxy]['datetime']
+    
     def setPrice(self, price):
         self.price = price
         

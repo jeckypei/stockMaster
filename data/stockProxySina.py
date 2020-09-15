@@ -4,7 +4,7 @@ import logging
 
 import abc  
 #from data.stock import Stock
-from data.stockProxy import StockProxy
+from .stockProxy import StockProxy
 from datetime import datetime
 '''
 HangKong stock
@@ -75,17 +75,19 @@ class StockProxySina(StockProxy):
     def __init__(self):
         self.url=self.API_URL
         self.dataArray=[]
+        self.name = "sina"
     def updatePrice(self, stock):
+        stockInfo = {}
         url=self.url + stock.getFullID()
         r = requests.get(url, timeout=3)
         if r == None:
             print("http request " + url + "Fail, no response")
-            return False
+            return None
         logging.debug(url)
         if r.status_code != requests.codes.ok :
             logging.error("http request error： " + r.status_code + ",url:" + r)    
             print("http request " + url + "Fail, error code: " + r.status_code)
-            return False
+            return None
         #print(r.content)
         dataStr = str(r.content)
         start = dataStr.find("\"", 0)
@@ -96,17 +98,17 @@ class StockProxySina(StockProxy):
         logging.debug(self.dataArray)
         #print(self.dataArray)
         if stock.getEx() == 'hk':
-            stock.setPrice(float(self.dataArray[6]))
-            stock.setPriceDatetime(datetime.strptime(self.dataArray[17] + " " +  self.dataArray[18], '%Y/%m/%d %H:%M' if self.dataArray[18].count(":") == 1 else '%Y/%m/%d %H:%M:%S') )
+            stockInfo['price'] = (float(self.dataArray[6]))
+            stockInfo['datetime'] = (datetime.strptime(self.dataArray[17] + " " +  self.dataArray[18], '%Y/%m/%d %H:%M' if self.dataArray[18].count(":") == 1 else '%Y/%m/%d %H:%M:%S') )
         elif  stock.getEx() == 'sh':   
-            stock.setPrice(float(self.dataArray[3]))
-            stock.setPriceDatetime(datetime.strptime(self.dataArray[30] + " " +  self.dataArray[31], '%Y-%m-%d %H:%M' if self.dataArray[31].count(":") == 1 else '%Y-%m-%d %H:%M:%S') )
+            stockInfo['price'] = (float(self.dataArray[3]))
+            stockInfo['datetime'] = (datetime.strptime(self.dataArray[30] + " " +  self.dataArray[31], '%Y-%m-%d %H:%M' if self.dataArray[31].count(":") == 1 else '%Y-%m-%d %H:%M:%S') )
         elif  stock.getEx() == 'sz':   
-            stock.setPrice(float(self.dataArray[3])) 
-            stock.setPriceDatetime(datetime.strptime(self.dataArray[30] + " " +  self.dataArray[31], '%Y-%m-%d %H:%M' if self.dataArray[31].count(":") == 1 else '%Y-%m-%d %H:%M:%S') )
+            stockInfo['price'] =(float(self.dataArray[3])) 
+            stockInfo['datetime'] = (datetime.strptime(self.dataArray[30] + " " +  self.dataArray[31], '%Y-%m-%d %H:%M' if self.dataArray[31].count(":") == 1 else '%Y-%m-%d %H:%M:%S') )
         else:
              logging.error("error： don't support Ex" + r.status_code + ",url:" + r)        
-        
+        return ('sina', stockInfo)
     
     def getPrice(self, stockFullID, time=""):
         pass
