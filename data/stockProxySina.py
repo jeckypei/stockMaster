@@ -77,10 +77,15 @@ class StockProxySina(StockProxy):
         self.dataArray=[]
     def updatePrice(self, stock):
         url=self.url + stock.getFullID()
-        r = requests.get(url)
+        r = requests.get(url, timeout=3)
+        if r == None:
+            print("http request " + url + "Fail, no response")
+            return False
         logging.debug(url)
         if r.status_code != requests.codes.ok :
             logging.error("http request error： " + r.status_code + ",url:" + r)    
+            print("http request " + url + "Fail, error code: " + r.status_code)
+            return False
         #print(r.content)
         dataStr = str(r.content)
         start = dataStr.find("\"", 0)
