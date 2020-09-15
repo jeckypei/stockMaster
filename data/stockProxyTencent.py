@@ -90,7 +90,14 @@ class StockProxyTencent(StockProxy):
     def updatePrice(self, stock):
         stockInfo = {}
         url=self.url + stock.getFullID()
-        r = requests.get(url, timeout=3)
+        try:
+            r = requests.get(url, timeout=3)
+        except requests.exceptions.Timeout as e:  
+              print("http request timeout :" + url )
+        except requests.exceptions.HTTPError as e:  
+              print("http request error :" + url )      
+        except requests.exceptions.ReadTimeout as e:  
+              print("http request Readtimeout :" + url)    
         if r == None:
             print("http request " + url + "Fail, no response")
             return None
