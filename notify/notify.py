@@ -6,6 +6,7 @@ import sys
 sys.path.append("..")
 from data.stock import Stock
 from data.stockProxy import StockProxy
+import prettytable as prettytable
 #from data.stockProxySina import StockProxySina
 #from policy.purePricePolicy import PurePricePolicy
 
@@ -35,26 +36,35 @@ class Notify(Thread) :
             print("-----------------------------------------------------------------------------------")
             
     def notifyToBuyStocks(self):
-        self.toBuyLock.acquire()
         print ("To Buy Stock (Number:%d)" % len(self.toBuyStocks) )
+        tbl = prettytable.PrettyTable()
+        tbl.field_names = ["ID", "Name", "source", "Price", "Range", "Time"]
+        self.toBuyLock.acquire()
         for i in self.toBuyStocks:
             stock = self.toBuyStocks[i]
-            print ("\t" +stock.getFullID() + "\t"  + stock.getName() + "\t src " +stock.proxySrc + "\tPrice\t" + str(stock.price) + " <= " + str(stock.toBuyPrice) + " " + str(stock.datetime ))
-        self.toBuyLock.release()       
+            tbl.add_row(stock.getFullID(), + stock.getName(),stock.proxySrc,stock.price , " <= " + str(stock.toBuyPrice) , str(stock.datetime ))
+        self.toBuyLock.release() 
+        print(tbl)      
     def notifyToSaleStocks(self):
-        self.toSaleLock.acquire()
         print ("To Sale Stock (Number:%d)" % len(self.toSaleStocks) )
+        tbl = prettytable.PrettyTable()
+        tbl.field_names = ["ID", "Name", "source", "Price", "Range", "Time"]
+        self.toSaleLock.acquire()
         for i in self.toSaleStocks:
             stock = self.toSaleStocks[i]
-            print ("\t" +stock.getFullID() + "\t"  + stock.getName() + "\t src " +stock.proxySrc + "\tPrice\t" + str(stock.price) + " >= " + str(stock.toSalePrice) + " " + str(stock.datetime ))
+            tbl.add_row(stock.getFullID(), + stock.getName(),stock.proxySrc,stock.price , " >= " + str(stock.toSalePrice) , str(stock.datetime ))
         self.toSaleLock.release()     
+        print(tbl)      
     def notifyKeepStocks(self):
-        self.keepLock.acquire()
         print ("To Keep Stock (Number:%d)" % len(self.keepStocks) )
+        tbl = prettytable.PrettyTable()
+        tbl.field_names = ["ID", "Name", "source", "Price", "Range", "Time"]
+        self.keepLock.acquire()
         for i in self.keepStocks:
             stock = self.keepStocks[i]
-            print ("\t" +stock.getFullID() + "\t"  + stock.getName() + "\t src " +stock.proxySrc + "\tPrice\t" + str(stock.price) + " > " + str(stock.toBuyPrice) + " &&  < " + str(stock.toSalePrice) + " " + str(stock.datetime))
-        self.keepLock.release()       
+            tbl.add_row(stock.getFullID(), + stock.getName(),stock.proxySrc,stock.price , " > " + str(stock.toBuyPrice) + " &&  < " + str(stock.toSalePrice) , str(stock.datetime ))
+        self.keepLock.release()    
+        print(tbl)         
     
     def addToBuyStock(self, stock):
         self.toBuyLock.acquire()
