@@ -38,7 +38,7 @@ class Notify(Thread) :
     def notifyToBuyStocks(self):
         print ("To Buy Stock (Number:%d)" % len(self.toBuyStocks) )
         tbl = prettytable.PrettyTable()
-        tbl.field_names = ["ID", "Name", "source", "Price", "Range", "Time"]
+        tbl.field_names = ["ID", "Name", "source", "Price", "ToBuy Price", "ToSale Price", "Time"]
         self.toBuyLock.acquire()
         for i in self.toBuyStocks:
             stock = self.toBuyStocks[i]
@@ -58,7 +58,7 @@ class Notify(Thread) :
     def notifyKeepStocks(self):
         print ("To Keep Stock (Number:%d)" % len(self.keepStocks) )
         tbl = prettytable.PrettyTable()
-        tbl.field_names = ["ID", "Name", "source", "Price", "Range", "Time"]
+        tbl.field_names = ["ID", "Name", "source", "Price", "ToBuy Price", "ToSale Price", "Time"]
         self.keepLock.acquire()
         for i in self.keepStocks:
             stock = self.keepStocks[i]
