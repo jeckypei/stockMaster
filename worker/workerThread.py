@@ -12,13 +12,13 @@ class WorkerThread(Thread):
         self.policy = policy
         self._stop = False
         Thread.__init__(self)
-
+        if len(self.stockSet) == 1:
+            self.setName("stockMaster.worker-" + self.stockSet[0].getFullID())
+        else:
+            self.setName("stockMaster.worker-All")
 
     def run(self):
         while not self._stop :
             for i in self.stockSet:
                 self.policy.runOneTime(self.stockSet[i])
             time.sleep(self.policy.interval)    
-            
-    def stop(self):
-        self._stop = True  

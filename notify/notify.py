@@ -36,6 +36,7 @@ class Notify(Thread) :
         self.interval = self.config["interval"]    
         self._stop = False
         Thread.__init__(self)
+        self.setName("stockMaster.notify")
         
     def timerFunc(self):
         self.event.set()
@@ -136,9 +137,7 @@ class Notify(Thread) :
         self.keepLock.release() 
         self.event.set()   
 
-        
-    def stop(self):
-        self._stop = True       
+  
     
     def sendEmail(self, title, content):
         mail_host = self.config["email"]["smtpServer"] 
