@@ -21,6 +21,7 @@ class Stock(object):
         self.proxySrc = ""
         self.newestProxy = None
         self.datetime = None
+        self.reqDatetime  = None
         ####
         self.ipoPrice = 0
         self.lowestPrice2Year = 0
@@ -128,15 +129,16 @@ class Stock(object):
             rp = self.proxy[i].updatePrice(self)
             if (rp != None):
                 self.proxyPrice[rp[0]] = rp [1]
-                if self.newestProxy == None:  
+                if self.newestProxy == None and rp[1]['price'] > 0:  
                     self.newestProxy = rp[0]
-                elif self.proxyPrice[rp[0]]['datetime'] > self.proxyPrice[self.newestProxy]['datetime']:   
+                elif self.proxyPrice[rp[0]]['datetime'] > self.proxyPrice[self.newestProxy]['datetime'] and rp[1]['price'] > 0:   
                     self.newestProxy = rp[0]
         if self.newestProxy != None:            
             #print("price from: " + self.newestProxy)
             self.price = self.proxyPrice[self.newestProxy]['price']
             self.datetime = self.proxyPrice[self.newestProxy]['datetime']
             self.proxySrc = self.newestProxy
+            self.reqDatetime = datetime.now()
     def setPrice(self, price):
         self.price = price
         

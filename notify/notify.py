@@ -50,11 +50,11 @@ class Notify(Thread) :
     def notifyToBuyStocks(self):
         self.toBuyMsg = ("\nTo Buy Stock (Number:%d)\n" % len(self.toBuyStocks) )
         tbl = prettytable.PrettyTable()
-        tbl.field_names = ["ID", "Name", "source", "Price", "ToBuy Price", "ToSale Price", "Time"]
+        tbl.field_names = ["ID", "Name", "source", "Price", "ToBuy Price", "ToSale Price", "Time", "reqTime"]
         self.toBuyLock.acquire()
         for i in self.toBuyStocks:
             stock = self.toBuyStocks[i]
-            tbl.add_row([stock.getFullID(), stock.getName(),stock.proxySrc,stock.price ,stock.toBuyPrice, stock.toSalePrice , stock.datetime])
+            tbl.add_row([stock.getFullID(), stock.getName(),stock.proxySrc,stock.price ,stock.toBuyPrice, stock.toSalePrice , stock.datetime, stock.reqDatetime])
         self.toBuyLock.release() 
         self.toBuyMsg = self.toBuyMsg + tbl.get_string() 
         if self.config["email"]['notifyKeep'] == True:
@@ -64,11 +64,11 @@ class Notify(Thread) :
     def notifyToSaleStocks(self):
         self.toSaleMsg =  ("\nTo Sale Stock (Number:%d)\n" % len(self.toSaleStocks) )
         tbl = prettytable.PrettyTable()
-        tbl.field_names = ["ID", "Name", "source", "Price", "ToBuy Price", "ToSale Price", "Time"]
+        tbl.field_names = ["ID", "Name", "source", "Price", "ToBuy Price", "ToSale Price", "Time", "reqTime"]
         self.toSaleLock.acquire()
         for i in self.toSaleStocks:
             stock = self.toSaleStocks[i]
-            tbl.add_row([stock.getFullID(), stock.getName(),stock.proxySrc,stock.price ,stock.toBuyPrice, stock.toSalePrice , stock.datetime])
+            tbl.add_row([stock.getFullID(), stock.getName(),stock.proxySrc,stock.price ,stock.toBuyPrice, stock.toSalePrice , stock.datetime,stock.reqDatetime])
         self.toSaleLock.release()     
         self.toSaleMsg = self.toSaleMsg + tbl.get_string() 
         if self.config["email"]['notifyKeep'] == True:
@@ -79,11 +79,11 @@ class Notify(Thread) :
     def notifyKeepStocks(self):
         self.keepMsg = ("\nTo Keep Stock (Number:%d)\n" % len(self.keepStocks) )
         tbl = prettytable.PrettyTable()
-        tbl.field_names = ["ID", "Name", "source", "Price", "ToBuy Price", "ToSale Price", "Time"]
+        tbl.field_names = ["ID", "Name", "source", "Price", "ToBuy Price", "ToSale Price", "Time", "reqTime"]
         self.keepLock.acquire()
         for i in self.keepStocks:
             stock = self.keepStocks[i]
-            tbl.add_row([stock.getFullID(), stock.getName(),stock.proxySrc,stock.price ,stock.toBuyPrice, stock.toSalePrice , stock.datetime])
+            tbl.add_row([stock.getFullID(), stock.getName(),stock.proxySrc,stock.price ,stock.toBuyPrice, stock.toSalePrice , stock.datetime,stock.reqDatetime])
         self.keepLock.release()    
         self.keepMsg = self.keepMsg + tbl.get_string()    
         if self.config["email"]['notifyKeep'] == True:
