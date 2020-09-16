@@ -1,8 +1,8 @@
 {
-    "name" : "华虹半导体",
-    "id" : "01347",
-    "ex" : "hk",
-    "area" : "shanghai",
+    "name" : "片仔黄",
+    "id" : "600436",
+    "ex" : "sh",
+    "area" : "漳州",
     "proxy" : ["tencent","sina"],
     "pe" : 0,
     "roe": 0,
@@ -31,7 +31,7 @@
     "highestPriceInDay" : 0,
     "startPriceInDay" : 0,
     "endPriceInDay" : 0,
-    "toBuyPrice" : 18,
-    "valuePrice" : 18,
-    "toSalePrice" : 30
+    "toBuyPrice" : 95,
+    "valuePrice" : 0,
+    "toSalePrice" : 150
 }
