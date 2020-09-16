@@ -1,6 +1,7 @@
 from threading import Thread
 import time
 import sys
+import traceback
 sys.path.append("..")
 from data.stock import Stock
 from data.stockProxy import StockProxy
@@ -19,6 +20,10 @@ class WorkerThread(Thread):
 
     def run(self):
         while not self._stop :
-            for i in self.stockSet:
-                self.policy.runOneTime(self.stockSet[i])
+            try:
+                for i in self.stockSet:
+                    self.policy.runOneTime(self.stockSet[i])
+            except Exception as e:
+                print(str(e))
+                traceback.print_stack()
             time.sleep(self.policy.interval)    

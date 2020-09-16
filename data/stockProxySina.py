@@ -1,7 +1,7 @@
 import abc  
 import requests
 import logging
-
+import traceback
 import abc  
 #from data.stock import Stock
 from .stockProxy import StockProxy
@@ -82,11 +82,13 @@ class StockProxySina(StockProxy):
         try:
             r = requests.get(url, timeout=3)
         except requests.exceptions.Timeout as e:  
-              print("http request timeout :" + url )
+            print("http request timeout :" + url )
         except requests.exceptions.HTTPError as e:  
-              print("http request error :" + url )      
+            print("http request error :" + url )      
         except requests.exceptions.ReadTimeout as e:  
-              print("http request Readtimeout :" + url)      
+            print("http request Readtimeout :" + url)    
+        except Exception as e:
+            traceback.print_stack()        
         if r == None:
             print("http request " + url + "Fail, no response")
             return None
