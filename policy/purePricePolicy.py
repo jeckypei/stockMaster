@@ -10,7 +10,8 @@ class PurePricePolicy :
         self.interval = interval
         self._stop = False
     def flow(self, stock) :
-        if stock.getPrice() <= stock.toBuyPrice: 
+         price = stock.getPrice()
+         if price <= stock.toBuyPrice: 
             if stock.notifyToBuy == False:
                  self.notify.addToBuyStock(stock)
                  stock.notifyToBuy = True
@@ -20,7 +21,7 @@ class PurePricePolicy :
             if stock.notifyKeep == True:
                  self.notify.delKeepStock(stock)
                  stock.notifyKeep = False          
-        elif stock.getPrice() >= stock.toSalePrice: 
+         elif price >= stock.toSalePrice: 
             if stock.notifyToSale == False:
                  self.notify.addToSaleStock(stock)
                  stock.notifyToSale = True
@@ -30,7 +31,7 @@ class PurePricePolicy :
             if stock.notifyKeep == True:
                  self.notify.delKeepStock(stock)
                  stock.notifyKeep = False         
-        else: 
+         else: 
             if stock.notifyKeep == False:
                  self.notify.addKeepStock(stock)
                  stock.notifyKeep = True  
