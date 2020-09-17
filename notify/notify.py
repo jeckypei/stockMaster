@@ -165,6 +165,8 @@ class Notify(Thread) :
             smtpObj.sendmail(sender, receivers, message.as_string())
         except smtplib.SMTPException as e:
             print("Error: could not send email" + str(e))
+        except Exception as e:
+            print("Error: could not send email" + str(e))    
         finally:
             if (smtpObj != None):
                 smtpObj.quit()
