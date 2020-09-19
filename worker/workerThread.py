@@ -30,7 +30,7 @@ class WorkerThread(Thread):
                 traceback.print_stack()
             #
             
-            if (isTradeTime()) :   
+            if (isTradeTime()) : 
                 time.sleep(self.policy.interval)  
             else:
                 time.sleep(self.policy.nonTradeInterval)      
