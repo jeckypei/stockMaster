@@ -4,10 +4,11 @@ from data.stock import Stock
 import time
 from notify.notify import Notify
 class PurePricePolicy :
-    def __init__(self, notify = None, interval = 5, loopCount = -1):
+    def __init__(self, notify = None, interval = 5, nonTradeInterval = 1800, loopCount = -1):
         self.notify = notify
         self.loopCount = loopCount
         self.interval = interval
+        self.nonTradeInterval = nonTradeInterval
         self._stop = False
     def flow(self, stock) :
          price = stock.getPrice()
@@ -42,15 +43,7 @@ class PurePricePolicy :
                  self.notify.delToSaleStock(stock)
                  stock.notifyToSale = False
                
- 
-            
-    '''            
-    def run(self, stock):
-        while ((self._stop == False) and (self.loopCount < 0 or self.loopCount > 0 )) :
-            self.flow(stock)    
-            self.loopCount -= 1
-            time.sleep(self.interval)
-    '''        
+
     
     def runOneTime(self, stock):
             self.flow(stock)    

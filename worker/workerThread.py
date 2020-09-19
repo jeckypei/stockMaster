@@ -1,5 +1,6 @@
 from threading import Thread
 import time
+import datetime
 import sys
 import traceback
 sys.path.append("..")
@@ -7,6 +8,7 @@ from data.stock import Stock
 from data.stockProxy import StockProxy
 from data.stockProxySina import StockProxySina
 from policy.purePricePolicy import PurePricePolicy
+from data.ex import isTradeTime
 class WorkerThread(Thread):
     def __init__(self,stockSet, policy):
         self.stockSet = stockSet
@@ -26,4 +28,9 @@ class WorkerThread(Thread):
             except Exception as e:
                 print(str(e))
                 traceback.print_stack()
-            time.sleep(self.policy.interval)    
+            #
+            
+            if (isTradeTime()) :   
+                time.sleep(self.policy.interval)  
+            else:
+                time.sleep(self.policy.nonTradeInterval)      

@@ -68,7 +68,7 @@ class Worker:
     def runOneThread(self):
         print("One Worker thread")
         if self.policyConfig["defaultPolicy"] == "purePricePolicy" :
-            policy = PurePricePolicy(self.notify, self.policyConfig["interval"])
+            policy = PurePricePolicy(self.notify, self.policyConfig["interval"], self.policyConfig["nonTradeInterval"])
         thread = WorkerThread(self.stockSet, policy)
         thread.start()      
                 

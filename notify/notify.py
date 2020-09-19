@@ -11,6 +11,7 @@ import prettytable as prettytable
 import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
+from data.ex import isTradeTime
 #from data.stockProxySina import StockProxySina
 #from policy.purePricePolicy import PurePricePolicy
 
@@ -33,7 +34,11 @@ class Notify(Thread) :
         self.configFile = self.configDir + "/notify.json"
         with open(self.configFile, "r") as pf:
             self.config = json.load(pf)
-        self.interval = self.config["interval"]    
+        self.interval = 0.2    # second
+        self.printInterval = self.config['print']['interval'] / self.interval
+        self.printNonTradeInterval = self.config['print']['nonTradeInterval'] / self.interval
+        self.emailInterval = self.config['email']['interval'] / self.interval
+        self.emailNonTradeInterval= self.config['email']['nonTradeInterval'] / self.interval
         self._stop = False
         Thread.__init__(self)
         self.setName("stockMaster.notify")
@@ -42,13 +47,53 @@ class Notify(Thread) :
         self.event.set()
                
     def run(self):
-        while (not self._stop and (self.event.wait(self.interval) != None)) :
-            print("\n\n\t\t\t" + str(datetime.datetime.now()))
-            self.event.clear()
-            self.notify()
+        ret = False
+        printTimerCnt = 0
+        printNonTradeTimerCnt = 0
+        emailTimerCnt = 0
+        emailNonTradeTimerCnt = 0
+        while True :
+            enPrint = True
+            enEmail = True
+            ret = self.event.wait(self.interval)
+            if ret == True:
+                self.event.clear()
+                printTimerCnt = 0;
+                printNonTradeTimerCnt = 0
+                emailTimerCnt = 0;
+                emailNonTradeTimerCnt = 0
+            else :
+                if (isTradeTime()) :
+                    printTimerCnt += 1
+                    if (printTimerCnt) >= self.printInterval:
+                        printTimerCnt = 0;
+                        printNonTradeTimerCnt = 0
+                    else:
+                         enPrint = False  
+                    emailTimerCnt += 1
+                    if (emailTimerCnt) >= self.emailInterval:
+                        emailTimerCnt = 0;
+                        emailNonTradeTimerCnt = 0
+                    else:
+                         enEmail = False      
+                else:
+                    printNonTradeTimerCnt += 1
+                    if (printNonTradeTimerCnt) >= self.printInterval:
+                        printTimerCnt = 0;
+                        printNonTradeTimerCnt = 0
+                    else:
+                         enPrint = False  
+                    emailNonTradeTimerCnt += 1     
+                    if (emailNonTradeTimerCnt) >= self.emailInterval:
+                        emailTimerCnt = 0;
+                        emailNonTradeTimerCnt = 0
+                    else:
+                         enEmail = False  
+            if (enPrint == True or enEmail == True):
+                self.notify(enPrint, enEmail)     
             
             
-    def notifyToBuyStocks(self):
+    def notifyToBuyStocks(self, enPrint = True, enEmail = True):
         self.toBuyMsg = ("\nTo Buy Stock (Number:%d)\n" % len(self.toBuyStocks) )
         tbl = prettytable.PrettyTable()
         tbl.field_names = ["ID", "Name", "source", "Price", "ToBuy Price", "ToSale Price", "Time", "reqTime"]
@@ -58,11 +103,11 @@ class Notify(Thread) :
             tbl.add_row([stock.getFullID(), stock.getName(),stock.proxySrc,stock.price ,stock.toBuyPrice, stock.toSalePrice , stock.datetime, stock.reqDatetime])
         self.toBuyLock.release() 
         self.toBuyMsg = self.toBuyMsg + tbl.get_string() 
-        if self.config["email"]['notifyKeep'] == True:
+        if enEmail and self.config["email"]['notifyKeep'] == True:
             self.emailMsg = self.emailMsg + self.toBuyMsg
-        if self.config["print"]['notifyKeep'] == True:
+        if enPrint and self.config["print"]['notifyKeep'] == True:
             self.printMsg = self.printMsg + self.toBuyMsg      
-    def notifyToSaleStocks(self):
+    def notifyToSaleStocks(self, enPrint = True, enEmail = True):
         self.toSaleMsg =  ("\nTo Sale Stock (Number:%d)\n" % len(self.toSaleStocks) )
         tbl = prettytable.PrettyTable()
         tbl.field_names = ["ID", "Name", "source", "Price", "ToBuy Price", "ToSale Price", "Time", "reqTime"]
@@ -72,12 +117,12 @@ class Notify(Thread) :
             tbl.add_row([stock.getFullID(), stock.getName(),stock.proxySrc,stock.price ,stock.toBuyPrice, stock.toSalePrice , stock.datetime,stock.reqDatetime])
         self.toSaleLock.release()     
         self.toSaleMsg = self.toSaleMsg + tbl.get_string() 
-        if self.config["email"]['notifyKeep'] == True:
+        if enEmail and self.config["email"]['notifyKeep'] == True:
             self.emailMsg = self.emailMsg + self.toSaleMsg
-        if self.config["print"]['notifyKeep'] == True:
+        if enPrint and self.config["print"]['notifyKeep'] == True:
             self.printMsg = self.printMsg + self.toSaleMsg 
              
-    def notifyKeepStocks(self):
+    def notifyKeepStocks(self, enPrint = True, enEmail = True):
         self.keepMsg = ("\nTo Keep Stock (Number:%d)\n" % len(self.keepStocks) )
         tbl = prettytable.PrettyTable()
         tbl.field_names = ["ID", "Name", "source", "Price", "ToBuy Price", "ToSale Price", "Time", "reqTime"]
@@ -87,20 +132,20 @@ class Notify(Thread) :
             tbl.add_row([stock.getFullID(), stock.getName(),stock.proxySrc,stock.price ,stock.toBuyPrice, stock.toSalePrice , stock.datetime,stock.reqDatetime])
         self.keepLock.release()    
         self.keepMsg = self.keepMsg + tbl.get_string()    
-        if self.config["email"]['notifyKeep'] == True:
+        if enEmail and self.config["email"]['notifyKeep'] == True:
             self.emailMsg = self.emailMsg + self.keepMsg
-        if self.config["print"]['notifyKeep'] == True:
+        if enPrint and self.config["print"]['notifyKeep'] == True:
             self.printMsg = self.printMsg + self.keepMsg        
-    def notify(self):
+    def notify(self, enPrint = True, enEmail = True):
         self.printMsg = ""
         self.emailMsg = ""
         self.wechatMsg = ""
-        self.notifyToBuyStocks()
-        self.notifyToSaleStocks()             
-        self.notifyKeepStocks()  
-        if len(self.printMsg) > 0:
+        self.notifyToBuyStocks(enPrint, enEmail)
+        self.notifyToSaleStocks(enPrint, enEmail)            
+        self.notifyKeepStocks(enPrint, enEmail) 
+        if enPrint and len(self.printMsg) > 0:
             print(self.printMsg)
-        if len(self.emailMsg) > 0:
+        if enEmail and len(self.emailMsg) > 0:
             self.sendEmail("StockMaster Notify " + str(datetime.datetime.now()) , self.emailMsg)    
          
     

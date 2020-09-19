@@ -1,9 +1,11 @@
 {
-    "interval": 60,
+    
     "print": {
         "notifyToBuy":true,
         "notifyToSale":true,
-        "notifyKeep":true
+        "notifyKeep":true,
+        "interval": 10,
+        "nonTradeInterval": 10
     },
     "email": {
         "smtpServer": "smtp.163.com",
@@ -14,9 +16,11 @@
         "password": "DZGAMFOANHHSBGHF",
         "sender": "stockmasters@163.com",
         "receivers": ["stockmasters@163.com"],
-        "notifyToBuy":true,
-        "notifyToSale":true,
-        "notifyKeep":true
+        "notifyToBuy":false,
+        "notifyToSale":false,
+        "interval": 60,
+        "nonTradeInterval": 3600,
+        "notifyKeep":false
     },
     "wechat": {
         "server": "",
