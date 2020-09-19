@@ -140,6 +140,9 @@ class Notify(Thread) :
         self.printMsg = ""
         self.emailMsg = ""
         self.wechatMsg = ""
+        header = "\n\t\t\t" + str(datetime.datetime.now())
+        self.printMsg += header
+        self.emailMsg += header
         self.notifyToBuyStocks(enPrint, enEmail)
         self.notifyToSaleStocks(enPrint, enEmail)            
         self.notifyKeepStocks(enPrint, enEmail) 

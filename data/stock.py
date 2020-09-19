@@ -139,6 +139,8 @@ class Stock(object):
             self.datetime = self.proxyPrice[self.newestProxy]['datetime']
             self.proxySrc = self.newestProxy
             self.reqDatetime = datetime.now()
+            
+            
     def setPrice(self, price):
         self.price = price
         

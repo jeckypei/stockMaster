@@ -14,8 +14,8 @@ class StockProxy(metaclass=abc.ABCMeta):
     def getName(self):
         pass
 
-    @staticmethod
-    def newStockProxy(proxyName) :
+    @classmethod
+    def newStockProxy(self,proxyName) :
         if proxyName == "sina":
             from .stockProxySina import StockProxySina
             return StockProxySina()
