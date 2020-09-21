@@ -94,10 +94,13 @@ class StockProxyTencent(StockProxy):
             r = requests.get(url, timeout=3)
         except requests.exceptions.Timeout as e:  
               print("http request timeout :" + url )
+              return
         except requests.exceptions.HTTPError as e:  
               print("http request error :" + url )      
+              return
         except requests.exceptions.ReadTimeout as e:  
-              print("http request Readtimeout :" + url)    
+              print("http request Readtimeout :" + url)   
+              return 
         if r == None:
             print("http request " + url + "Fail, no response")
             return None
