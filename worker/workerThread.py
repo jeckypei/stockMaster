@@ -26,8 +26,8 @@ class WorkerThread(Thread):
                 for i in self.stockSet:
                     self.policy.runOneTime(self.stockSet[i])
             except Exception as e:
-                print(str(e))
-                traceback.print_stack()
+                print("worker thread: " + str(e))
+                #traceback.print_stack()
             #
             
             if (isTradeTime()) : 
