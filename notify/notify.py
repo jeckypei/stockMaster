@@ -211,10 +211,10 @@ class Notify(Thread) :
                 smtpObj = smtplib.SMTP_SSL(mail_host, mail_sslPort) 
             smtpObj.login(mail_user, mail_password)  
             smtpObj.sendmail(sender, receivers, message.as_string())
+            smtpObj.quit()
         except smtplib.SMTPException as e:
             print("Error: could not send email" + str(e))
         except Exception as e:
             print("Error: could not send email" + str(e))    
-        finally:
-            if (smtpObj != None):
-                smtpObj.quit()
+
+            
