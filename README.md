@@ -63,7 +63,10 @@
   
   
 （6）refer doc
-     https://blog.csdn.net/otter1010/article/details/105884256/
+     stock Interface:  https://blog.csdn.net/otter1010/article/details/105884256/
+     AI-LSTM: https://blog.csdn.net/yingqubaifumei/article/details/100888147?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.channel_param
+     
+     
 
 
 
