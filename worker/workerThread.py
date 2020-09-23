@@ -29,8 +29,7 @@ class WorkerThread(Thread):
                 print("worker thread: " + str(e))
                 #traceback.print_stack()
             #
-            
-            if (isTradeTime()) : 
+            if ( (len(self.stockSet) == 1 and isTradeTime(self.stockSet[0].ex) ) or (len(self.stockSet) > 1 and isTradeTime('all'))) : 
                 time.sleep(self.policy.interval)  
             else:
                 time.sleep(self.policy.nonTradeInterval)      

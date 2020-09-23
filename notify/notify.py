@@ -63,7 +63,7 @@ class Notify(Thread) :
                 emailTimerCnt = 0;
                 emailNonTradeTimerCnt = 0
             else :
-                if (isTradeTime()) :
+                if (isTradeTime('all')) :
                     printTimerCnt += 1
                     if (printTimerCnt) >= self.printInterval:
                         printTimerCnt = 0;
@@ -84,7 +84,7 @@ class Notify(Thread) :
                     else:
                          enPrint = False  
                     emailNonTradeTimerCnt += 1     
-                    if (emailNonTradeTimerCnt) >= self.emailInterval:
+                    if (emailNonTradeTimerCnt) >= self.emailNonTradeInterval:
                         emailTimerCnt = 0;
                         emailNonTradeTimerCnt = 0
                     else:
