@@ -39,6 +39,8 @@ class Notify(Thread) :
         self.printNonTradeInterval = self.config['print']['nonTradeInterval'] / self.interval
         self.emailInterval = self.config['email']['interval'] / self.interval
         self.emailNonTradeInterval= self.config['email']['nonTradeInterval'] / self.interval
+        self.enableEmail= self.config['email']['enable'] 
+        self.enablePrint= self.config['print']['enable'] 
         self._stop = False
         Thread.__init__(self)
         self.setName("stockMaster.notify")
@@ -90,7 +92,7 @@ class Notify(Thread) :
                     else:
                          enEmail = False  
             if (enPrint == True or enEmail == True):
-                self.notify(enPrint, enEmail)     
+                self.notify(self.enablePrint and enPrint, self.enableEmail and enEmail)     
             
             
     def notifyToBuyStocks(self, enPrint = True, enEmail = True):
